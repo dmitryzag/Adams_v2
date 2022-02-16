@@ -71,9 +71,7 @@ action.addEventListener('click', () => {
     let nodeInput = Number(document.querySelector("#node").value);
     let isEmptyFun = document.querySelector("#fun").value === '';
     let isEmptyNode = document.querySelector("#node").value === '';
-
-    let latestValues = [...methodRungeCutte(funcInput, 0, 0, nodeInput)];
-    
+        
     if(funcInput <= 0 || nodeInput < 2 || isEmptyFun || isEmptyNode){
       alert("ОШИБКА!");
     } else{

@@ -1,4 +1,3 @@
-
 let action = document.querySelector("#action");
 let output = document.querySelector("#output");
 
@@ -27,22 +26,6 @@ const methodRungeCutte = (b,xi,y,n) => {
     }
     console.log(h);
     return [xArray, yArray];
-};
-
-const methodAdams = (array, b, n) => {
-
-  let dy;
-  const h = Math.abs(b / (n - 1));
-  let x = [...array[0].slice(0,4)];
-  let y = [...array[1].slice(0,4)];
-
-  for(let i = 0; i < n - 4; i++){
-    let [f1, f2, f3, f4] = [[rFun(x[i+3], y[i+3])], [rFun(x[i+2], y[i+2])], [rFun(x[i+1], y[i+1])], [rFun(x[i],y[i])]];
-    dy = (h / 24) * (55 * f1 - 59 * f2 + 37 * f3 - 9 * f4);
-    y.push(dy + y[i+3]);
-    x.push(x[i+3] + h);
-  };
-  return [x,y];
 };
 
 const methodMilna = (array,b,n) => {
@@ -90,8 +73,6 @@ action.addEventListener('click', () => {
     let isEmptyFun = document.querySelector("#fun").value === '';
     let isEmptyNode = document.querySelector("#node").value === '';
 
-    let latestValues = [...methodRungeCutte(funcInput, 0, 0, nodeInput)];
-
     if(funcInput <= 0 || nodeInput < 2 || isEmptyFun || isEmptyNode){
       alert("ОШИБКА!");
     } else{
@@ -99,7 +80,6 @@ action.addEventListener('click', () => {
       let mRG = [...methodRungeCutte(funcInput,0,0,nodeInput)];
       let fAd = methodMilna(mRG, funcInput, nodeInput);
       let [ , yI2] = fAd;
-      console.log(fAd);
       let diff = dRgA(fAd[1], methodRungeCutte(funcInput, 0, 0, nodeInput)[1]);
 
       [xI,yI] = methodRungeCutte(funcInput, 0, 0, nodeInput);
@@ -112,7 +92,7 @@ action.addEventListener('click', () => {
         }, {
           fullWidth: true,
           chartPadding: {
-            right: 100
+            right: 40
           },
           high: Math.max(yI) ,
           low: Math.min(yI),
@@ -122,7 +102,6 @@ action.addEventListener('click', () => {
             onlyInteger: false,
             offset: 70,
           }
-          
         });
     }
 });
